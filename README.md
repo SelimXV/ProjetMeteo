@@ -8,7 +8,7 @@
 
 ## Langages utilisés
   
-* Langage de programmation utilisé : <code>VueJS</code><code>TailWindCSS</code>
+* Langage de programmation utilisé : <code>VueJS</code> <code>TailWindCSS</code>
 * Logiciel utilisé : **WebStorm**
 
 ## Créateurs 
