@@ -2,6 +2,8 @@
 
 import {reactive} from "vue";
 
+const emit = defineEmits(["place-data"]);
+
 const searchTerm = reactive({
   query: "",
   timeout: null,
@@ -24,8 +26,13 @@ const  handleSearch = () => {
   }, 500);
 }
 
-const getWeather= (id) => {
-  console.log(id);
+const getWeather= async (id) => {
+  const res= await fetch(`http://api.weatherapi.com/v1/forecast.json?key=&q=id:${id}&days=3&aqi=no&alerts=no`);
+  const data = await res.json();
+  emit("place-data", data)
+  searchTerm.results = null;
+  searchTerm.query = "";
+
 }
 
 
@@ -49,7 +56,7 @@ const getWeather= (id) => {
     </form>
     <!-- search suggestions -->
     <div class="bg-white my-2 rounded-lg shadow-lg">
-      <div v-if="searchTerm.results === null">
+      <div v-if="searchTerm.results === null"></div>
       <div v-for="place in searchTerm.results" :key="place.id">
         <button @click="getWeather(place.id)" class="px-3 my-2 hover:text-indigo-600 hover:font-bold w-full text-left">
           {{ place.name }}, {{ place.region }}, {{ place.country }}
